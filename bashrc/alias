@@ -1,0 +1,16 @@
+alias cls='clear'
+
+alias apt.install='sudo apt-get install'
+alias apt.autoclean='sudo apt-get autoclean'
+alias apt.autoremove='sudo apt-get autoremove'
+alias apt.search='sudo apt-cache search'
+alias apt.update='sudo apt-get update'
+alias apt.upgrade='sudo apt-get upgrade'
+alias apt.add-ppa='sudo add-apt-repository'
+
+alias unzip.big5='unzip -O cp950'
+alias unzip.gb='unzip -O cp936'
+alias unzip.jp='unzip -O cp932'
+alias unzip.kr='unzip -O cp949'
+
+alias wine.jp='LANG=ja_JP.utf8 wine'
