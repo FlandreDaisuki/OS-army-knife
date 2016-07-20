@@ -1,19 +1,15 @@
 # reference https://github.com/yyuu/pyenv/wiki/Common-build-problems
 sudo apt-get install -y \
-make \
-build-essential \
+make wget curl llvm \
 libssl-dev \
 zlib1g-dev \
 libbz2-dev \
-libreadline-dev \
 libsqlite3-dev \
-wget \
-curl \
-llvm \
+libreadline-dev \
+build-essential \
 libncurses5-dev \
 libncursesw5-dev \
-xz-utils \
-libssl-dev
+xz-utils
 
 git clone https://github.com/yyuu/pyenv.git ~/.pyenv
 
