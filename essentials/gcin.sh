@@ -1,3 +1,4 @@
+#!/bin/bash
 # http://hyperrate.com/thread.php?tid=28044
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 835AB0E3
 

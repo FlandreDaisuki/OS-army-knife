@@ -1,4 +1,4 @@
-
+#!/bin/bash
 # Usage:
 # $ addDicts.sh *.dict
 

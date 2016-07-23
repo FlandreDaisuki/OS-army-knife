@@ -1,3 +1,4 @@
+#!/bin/bash
 # https://ffmpeg.org/download.html
 
 cat /etc/os-release

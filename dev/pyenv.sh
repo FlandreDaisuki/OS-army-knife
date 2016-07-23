@@ -1,3 +1,4 @@
+#!/bin/bash
 # reference https://github.com/yyuu/pyenv/wiki/Common-build-problems
 sudo apt-get install -y \
 make wget curl llvm \

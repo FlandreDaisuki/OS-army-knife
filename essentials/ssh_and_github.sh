@@ -1,3 +1,4 @@
+#!/bin/bash
 sudo apt-get install -y openssh-server git
 ssh-keygen -t rsa -b 4096
 
