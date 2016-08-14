@@ -14,7 +14,7 @@ alias apt.update='sudo apt-get update'
 alias apt.upgrade='sudo apt-get upgrade'
 alias apt.add-ppa='sudo add-apt-repository'
 
-alias apt.remove='sudo apt-get remove'
+alias apt.remove='sudo apt-get purge'
 alias apt.uninstall='apt.remove'
 _apt_remove() {
     local cur
