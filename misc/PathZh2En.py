@@ -48,3 +48,4 @@ if __name__ == '__main__':
 		run(mvln, shell=True)
 		f = open(home + '/.config/user-dirs.dirs', 'w+')
 		print(xdg, file=f)
+		run('sudo service mdm restart', shell=True)
