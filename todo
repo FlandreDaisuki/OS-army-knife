@@ -1,0 +1,12 @@
+dev.install
+---
+vscode
+nvm
+python
+pyenv
+clang/lldb
+clang-format
+(yarn)
+OpenGL
+py-opengl
+g++/gdb
