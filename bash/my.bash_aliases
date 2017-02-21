@@ -1,3 +1,4 @@
+alias addppa='sudo add-apt-repository -y'
 alias cls='clear'
 alias optim.jpg='jpegoptim *.jpg *.jpeg'
 alias optim.png='optipng *.png'
