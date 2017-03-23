@@ -46,6 +46,15 @@ if [[ `isInstalled firefox` = "false" ]]; then
     fi
 fi
 
+#filezilla
+if [[ `isInstalled filezilla` = "false" ]]; then
+    echo "Install filezilla? [y/N]"
+    read _t
+    if [[ `isYes $_t` = "true" ]]; then
+        packages+=('filezilla')
+    fi
+fi
+
 #ttf-mscorefonts-installer
 if [[ `isInstalled ttf-mscorefonts-installer` = "false" ]]; then
     echo "Install MS fonts? [y/N]"
