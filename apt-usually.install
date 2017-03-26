@@ -144,13 +144,11 @@ fi
 
 ############################################################################
 
-for cmd in "${precmd[@]}"
-do
+for cmd in "${precmd[@]}"; do
     sudo bash -c "$cmd"
 done
 
-for ppa in "${ppas[@]}"
-do
+for ppa in "${ppas[@]}"; do
     sudo add-apt-repository -y $ppa
 done
 
@@ -160,7 +158,6 @@ sudo apt purge -y fonts-arphic-ukai fonts-arphic-uming
 sudo apt autoremove
 sudo apt autoclean
 
-for cmd in "${postcmd[@]}"
-do
+for cmd in "${postcmd[@]}"; do
     sudo bash -c "$cmd"
 done
