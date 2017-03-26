@@ -1,7 +1,11 @@
 #!/bin/bash
 precmd=()
 ppas=()
-packages=(vim build-essential ttf-ancient-fonts openssh-server git)
+packages=(vim git \
+    openssh-server \
+    gnome-terminal \
+    build-essential \
+    ttf-ancient-fonts)
 postcmd=()
 
 isYes() {
