@@ -41,13 +41,10 @@ if [[ `isInstalled google-chrome-stable` = "false" ]]; then
 fi
 
 #firefox
-if [[ `isInstalled firefox` = "false" ]]; then
-    echo "Install firefox? [y/N]"
-    read _t
-    if [[ `isYes $_t` = "true" ]]; then
-        ppas+=('ppa:ubuntu-mozilla-security/ppa')
-        packages+=('firefox' 'firefox-locale-zh-hant')
-    fi
+if [[ 1 ]]; then
+    precmd+=('echo -e "Package: firefox*\nPin: origin ppa.launchpad.net\nPin-Priority: 750" > /etc/apt/preferences.d/firefox.pref')
+    ppas+=('ppa:ubuntu-mozilla-security/ppa')
+    packages+=('firefox' 'firefox-locale-zh-hant')
 fi
 
 #filezilla
