@@ -107,6 +107,14 @@ if [[ `isInstalled ffmpeg` = "false" ]]; then
     fi
 fi
 
+#vlc
+if [[ `isInstalled vlc` = "false" ]]; then
+    echo "Install vlc? [y/N]"
+    read _t
+    if [[ `isYes $_t` = "true" ]]; then
+        packages+=('vlc')
+    fi
+fi
 
 #shutter
 if [[ `isInstalled shutter` = "false" ]]; then
