@@ -1,45 +1,33 @@
 #!/bin/bash
-target=$HOME
-
-isYes() {
-    if [[ "$1" = "y" || "$1" = "Y" || "$1" = "yes" || "$1" = "Yes" ]]; then
-        echo "true"
-    else
-        echo "false"
+if [ -d ~/bashrc.d ]; then
+  for i in ~/bashrc.d/*; do
+    if [ -r $i ]; then
+      . $i
     fi
-}
-
-rewrite_bashrc() {
-    cp example.bashrc $target/.bashrc
-    echo "" >> $target/.bashrc
-    echo "# # # # # # # # # # #" >> $target/.bashrc
-    echo "# My bashrc setting #" >> $target/.bashrc
-    echo "# # # # # # # # # # #" >> $target/.bashrc
-    echo "" >> $target/.bashrc
-    cat my.bashrc >> $target/.bashrc
-}
-
-if [[ -f $target/.bashrc ]]; then
-    echo "~/.bashrc exists. Rewrite it all? [y/N]"
-    read _rewrite
-    if [[ `isYes $_rewrite` = "true" ]]; then
-        rewrite_bashrc
-    else
-        echo "Append my.bashrc to ~/.bashrc? [y/N]"
-        read _append
-        if [[ `isYes $_append` = "true" ]]; then
-            echo "" >> $target/.bashrc
-            cat my.bashrc >> $target/.bashrc
-        fi
-    fi
+  done
+  unset i
 else
-    rewrite_bashrc
+  mkdir ~/bashrc.d
 fi
 
-echo "Append my.bash_aliases to ~/.bash_aliases? [y/N]"
-read _append
-if [[ `isYes $_append` = "true" ]]; then
-    cat my.bash_aliases >> $target/.bash_aliases
-    sort -u $target/.bash_aliases | grep "alias" > tmp.bash_aliases
-    mv tmp.bash_aliases $target/.bash_aliases
+if [[ -f ~/.bashrc ]]; then
+  if ! [[ $(cat ~/.bashrc | grep 'bash/setup.sh') ]]; then
+    echo '
+# After bash/setup.sh
+if [ -d ~/bashrc.d ]; then
+  for i in ~/bashrc.d/*; do
+    if [ -r $i ]; then
+      . $i
+    fi
+  done
+  unset i
 fi
+' >> ~/.bashrc
+  fi
+fi
+
+cp bashrc.d/git_prompt.bashrc ~/bashrc.d/
+cp bashrc.d/misc.aliases ~/bashrc.d/
+cp bashrc.d/unzip.aliases ~/bashrc.d/
+
+. ~/.bashrc

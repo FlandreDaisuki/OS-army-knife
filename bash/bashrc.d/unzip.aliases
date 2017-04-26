@@ -1,0 +1,4 @@
+alias unzip.big5='unzip -O cp950'
+alias unzip.gb='unzip -O cp936'
+alias unzip.jp='unzip -O cp932'
+alias unzip.kr='unzip -O cp949'

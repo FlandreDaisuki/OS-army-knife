@@ -1,3 +1,4 @@
+#!/bin/sh
 git_prompt() {
     foreLightGreen="\[\033[1;32m\]"
     foreRed="\[\033[1;31m\]"

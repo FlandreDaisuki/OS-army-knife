@@ -1,0 +1,3 @@
+alias addppa='sudo add-apt-repository -y'
+alias cls='clear'
+alias py='python'
