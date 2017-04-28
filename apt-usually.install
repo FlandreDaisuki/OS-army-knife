@@ -103,7 +103,7 @@ if [[ `isInstalled ffmpeg` = "false" ]]; then
     echo "Install ffmpeg? [y/N]"
     read _t
     if [[ `isYes $_t` = "true" ]]; then
-        packages+=('ffmpeg' 'ffmpegthumbs')
+        packages+=('ffmpeg' 'ffmpegthumbnailer')
     fi
 fi
 
