@@ -5,7 +5,8 @@ packages=(vim git \
     openssh-server \
     gnome-terminal \
     build-essential \
-    ttf-ancient-fonts)
+    ttf-ancient-fonts \
+    language-pack-gnome-zh-hant)
 postcmd=()
 
 isYes() {
