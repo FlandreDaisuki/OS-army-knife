@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 from os.path import expanduser, exists
-from subprocess import run
 home = expanduser("~")
 
 xdg = """# This file is written by xdg-user-dirs-update
@@ -11,41 +10,39 @@ xdg = """# This file is written by xdg-user-dirs-update
 # homedir-relative path, or XDG_xxx_DIR="/yyy", where /yyy is an
 # absolute path. No other format is supported.
 #
-XDG_DESKTOP_DIR="$HOME/Desktop"
-XDG_DOWNLOAD_DIR="$HOME/Download"
-XDG_TEMPLATES_DIR="$HOME/Template"
-XDG_PUBLICSHARE_DIR="$HOME/Public"
-XDG_DOCUMENTS_DIR="$HOME/Document"
-XDG_MUSIC_DIR="$HOME/Music"
-XDG_PICTURES_DIR="$HOME/Picture"
-XDG_VIDEOS_DIR="$HOME/Video"
+
+# XDG_DESKTOP_DIR="$HOME/Desktop"
+# XDG_DOCUMENTS_DIR="$HOME/Documents"
+# XDG_DOWNLOAD_DIR="$HOME/Downloads"
+# XDG_MUSIC_DIR="$HOME/Music"
+# XDG_PICTURES_DIR="$HOME/Pictures"
+# XDG_PUBLICSHARE_DIR="$HOME/Public"
+# XDG_TEMPLATES_DIR="$HOME/Templates"
+# XDG_VIDEOS_DIR="$HOME/Videos"
+
+XDG_DESKTOP_DIR="$HOME/桌面"
+XDG_DOWNLOAD_DIR="$HOME/下載"
+XDG_TEMPLATES_DIR="$HOME/模板"
+XDG_PUBLICSHARE_DIR="$HOME/公共"
+XDG_DOCUMENTS_DIR="$HOME/文件"
+XDG_MUSIC_DIR="$HOME/音樂"
+XDG_PICTURES_DIR="$HOME/圖片"
+XDG_VIDEOS_DIR="$HOME/影片"
 """
 
 mvln = """
 cd ~;
-mv 桌面 Desktop;
-mv 下載 Download;
-mv 模板 Template;
-mv 公共 Public;
-mv 文件 Document;
-mv 音樂 Music;
-mv 圖片 Picture;
-mv 影片 Video;
-ln -s Desktop 桌面;
-ln -s Download 下載;
-ln -s Template 模板;
-ln -s Public 公共;
-ln -s Document 文件;
-ln -s Music 音樂;
-ln -s Picture 圖片;
-ln -s Video 影片;
+mv 桌面 Desktop   && ln -s Desktop 桌面;
+mv 下載 Downloads && ln -s Downloads 下載;
+mv 模板 Templates && ln -s Templates 模板;
+mv 公共 Public    && ln -s Public 公共;
+mv 文件 Documents && ln -s Documents 文件;
+mv 音樂 Music     && ln -s Music 音樂;
+mv 圖片 Pictures  && ln -s Pictures 圖片;
+mv 影片 Videos    && ln -s Videos 影片;
 """
 
 if __name__ == '__main__':
-	if exists(home + '/Download'):
-		print('English Path Already')
-	else:
-		run(mvln, shell=True)
-		f = open(home + '/.config/user-dirs.dirs', 'w+')
-		print(xdg, file=f)
-		run('sudo service mdm restart', shell=True)
+	run(mvln, shell=True)
+	f = open(home + '/.config/user-dirs.dirs', 'w+')
+	print(xdg, file=f)
