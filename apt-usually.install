@@ -6,6 +6,7 @@ packages=(vim git \
     gnome-terminal \
     build-essential \
     ttf-ancient-fonts \
+    fonts-wqy-microhei \
     language-pack-gnome-zh-hant)
 postcmd=()
 
@@ -18,7 +19,7 @@ isYes() {
 }
 
 isInstalled() {
-    r=`apt list --installed 2>/dev/null | grep $1`
+    r=$(apt list --installed 2>/dev/null | grep "$1")
     if [[ ${#r} != 0 ]]; then
         echo "true"
     else
@@ -26,14 +27,12 @@ isInstalled() {
     fi
 }
 
-sudo dpkg --add-architecture i386
-
 # chrome
-if [[ `isInstalled google-chrome-stable` = "false" ]]; then
+if [[ $(isInstalled google-chrome-stable) = "false" ]]; then
     echo "Install google chrome? [y/N]"
-    read _t
-    if [[ `isYes $_t` = "true" ]]; then
-        precmd+=('wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -')
+    read -r _t
+    if [[ $(isYes "$_t") = "true" ]]; then
+        precmd+=('wget -qO - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -')
         precmd+=('echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list')
         packages+=('google-chrome-stable')
         _src='/etc/apt/sources.list.d'
@@ -41,110 +40,70 @@ if [[ `isInstalled google-chrome-stable` = "false" ]]; then
     fi
 fi
 
-#firefox
-if [[ 1 ]]; then
-    precmd+=('echo -e "Package: firefox*\nPin: origin ppa.launchpad.net\nPin-Priority: 750" > /etc/apt/preferences.d/firefox.pref')
-    ppas+=('ppa:ubuntu-mozilla-security/ppa')
-    packages+=('firefox' 'firefox-locale-zh-hant')
-fi
-
 #filezilla
-if [[ `isInstalled filezilla` = "false" ]]; then
+if [[ $(isInstalled filezilla) = "false" ]]; then
     echo "Install filezilla? [y/N]"
-    read _t
-    if [[ `isYes $_t` = "true" ]]; then
+    read -r _t
+    if [[ $(isYes "$_t") = "true" ]]; then
         packages+=('filezilla')
     fi
 fi
 
 #ttf-mscorefonts-installer
-if [[ `isInstalled ttf-mscorefonts-installer` = "false" ]]; then
+if [[ $(isInstalled ttf-mscorefonts-installer) = "false" ]]; then
     echo "Install MS fonts? [y/N]"
-    read _t
-    if [[ `isYes $_t` = "true" ]]; then
+    read -r _t
+    if [[ $(isYes "$_t") = "true" ]]; then
         packages+=('ttf-mscorefonts-installer')
     fi
 fi
 
-#gcin
-if [[ `isInstalled gcin` = "false" ]]; then
-    echo "Install gcin? [y/N]"
-    read _t
-    if [[ `isYes $_t` = "true" ]]; then
-        # Test capable gcin version first
-        _1410=`cat /etc/*release 2>/dev/null | grep -i 'trusty\|utopic'`
-        _1504=`cat /etc/*release 2>/dev/null | grep -i 'vivid'`
-        _1510=`cat /etc/*release 2>/dev/null | grep -i 'wily'`
-        _1604=`cat /etc/*release 2>/dev/null | grep -i 'xenial'`
-
-        if [[ ${#_1604} != 0 ]]; then
-            _debURL='deb http://hyperrate.com/gcin-ubuntu1604 eliu release'
-        elif [[ ${#_1410} != 0 ]]; then
-            _debURL='deb http://hyperrate.com/debian eliu release'
-        elif [[ ${#_1504} != 0 ]]; then
-            _debURL='deb http://hyperrate.com/gcin-ubuntu1504 eliu release'
-        elif [[ ${#_1510} != 0 ]]; then
-            _debURL='deb http://hyperrate.com/gcin-ubuntu1510 eliu release'
-        else
-            _debURL=''
-        fi
-
-        if [[ _debURL = '' ]]; then
-            echo 'go http://hyperrate.com/thread.php?tid=28044 to find help'
-        else
-            precmd+=('sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 835AB0E3')
-            precmd+=("echo $_debURL > /etc/apt/sources.list.d/gcin.list")
-            packages+=('gcin' 'gcin-anthy')
-        fi
+#fcitx-chewing
+if [[ $(isInstalled fcitx-chewing) = "false" ]]; then
+    echo "Install fcitx-chewing? [y/N]"
+    read -r _t
+    if [[ $(isYes "$_t") = "true" ]]; then
+        packages+=('fcitx-chewing')
     fi
 fi
 
 #ffmpeg
-if [[ `isInstalled ffmpeg` = "false" ]]; then
+if [[ $(isInstalled ffmpeg) = "false" ]]; then
     echo "Install ffmpeg? [y/N]"
-    read _t
-    if [[ `isYes $_t` = "true" ]]; then
+    read -r _t
+    if [[ $(isYes "$_t") = "true" ]]; then
         packages+=('ffmpeg' 'ffmpegthumbnailer')
     fi
 fi
 
-#vlc
-if [[ `isInstalled vlc` = "false" ]]; then
-    echo "Install vlc? [y/N]"
-    read _t
-    if [[ `isYes $_t` = "true" ]]; then
-        packages+=('vlc')
+#mpv
+if [[ $(isInstalled mpv) = "false" ]]; then
+    echo "Install mpv? [y/N]"
+    read -r _t
+    if [[ $(isYes "$_t") = "true" ]]; then
+        ppas+=('ppa:mc3man/mpv-tests')
+        packages+=('mpv')
     fi
 fi
 
 #shutter
-if [[ `isInstalled shutter` = "false" ]]; then
+if [[ $(isInstalled shutter) = "false" ]]; then
     echo "Install shutter? [y/N]"
-    read _t
-    if [[ `isYes $_t` = "true" ]]; then
+    read -r _t
+    if [[ $(isYes "$_t") = "true" ]]; then
         ppas+=('ppa:shutter/ppa')
         packages+=('shutter' 'libgoo-canvas-perl')
     fi
 fi
 
-#wine
-if [[ `isInstalled wine` = "false" ]]; then
-    echo "Install wine? [y/N]"
-    read _t
-    if [[ `isYes $_t` = "true" ]]; then
-        ppas+=('ppa:wine/wine-builds')
-        packages+=('playonlinux')
-        postcmd+=('sudo apt install -y --install-recommends winehq-staging')
-    fi
-fi
-
 #sublime text 3
-if [[ `isInstalled sublime-text-installer` = "false" ]]; then
+if [[ $(isInstalled sublime-text-installer) = "false" ]]; then
     echo "Install sublime text 3? [y/N]"
-    read _t
-    if [[ `isYes $_t` = "true" ]]; then
-        ppas+=('ppa:webupd8team/sublime-text-3')
-        packages+=('sublime-text-installer')
+    read -r _t
+    if [[ $(isYes "$_t") = "true" ]]; then
+        precmd+=('wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -')
+        precmd+=('echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list')
+        packages+=('apt-transport-https' 'sublime-text')
     fi
 fi
 
@@ -155,7 +114,7 @@ for cmd in "${precmd[@]}"; do
 done
 
 for ppa in "${ppas[@]}"; do
-    sudo add-apt-repository -y $ppa
+    sudo add-apt-repository -y "$ppa"
 done
 
 sudo apt update
