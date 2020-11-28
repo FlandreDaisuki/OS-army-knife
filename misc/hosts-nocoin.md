@@ -2,9 +2,9 @@
 
 備份 `/etc/hosts` 放到 `/root/hosts.origin`
 
-```
-127.0.0.1	localhost
-127.0.1.1	your-hostname
+```txt
+127.0.0.1 localhost
+127.0.1.1 your-hostname
 
 # The following lines are desirable for IPv6 capable hosts
 ::1     ip6-localhost ip6-loopback
@@ -15,6 +15,7 @@ ff02::2 ip6-allrouters
 ```
 
 創一個 `/root/hosts-nocoin.sh`
+
 ```sh
 #!/bin/sh
 cd /root && \
